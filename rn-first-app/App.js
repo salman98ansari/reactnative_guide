@@ -9,41 +9,53 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
+import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [entergoal, setEntergoal] = useState("");
   const [courcegoal, setCourcegoal] = useState([]);
-  const inputhandler = (enteredtext) => {
-    setEntergoal(enteredtext);
-  };
-  const addGoalHandler = () => {
+
+  const addGoalHandler = (goalTitle, setEntergoal) => {
     // setCourcegoal((currentGoals) => [...currentGoals, entergoal]);
-    if (entergoal !== "") {
-      setCourcegoal([...courcegoal, entergoal]);
-      // setEntergoal("");
+    if (goalTitle !== "") {
+      setCourcegoal([
+        ...courcegoal,
+        {
+          id: Math.random().toString(),
+          value: goalTitle,
+        },
+      ]);
     }
+    setEntergoal("");
+  };
+
+  const removeGoalHandler = (goalId) => {
+    setCourcegoal((currentGoals) => {
+      return currentGoals.filter((goal) => goal.id !== goalId);
+    });
   };
 
   return (
     <View style={styles.screen}>
-      <View style={styles.inputcontainer}>
-        <TextInput
-          placeholder="Add Goals"
-          style={styles.textinput}
-          onChangeText={inputhandler}
-          value={entergoal}
-        />
-        <View style={{ padding: 10 }}>
-          <Button title="ADD" onPress={addGoalHandler} />
-        </View>
-      </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      {/* <ScrollView showsVerticalScrollIndicator={false}>
         {courcegoal.map((goal, index) => (
           <View key={index} style={styles.listitem}>
             <Text>{goal}</Text>
           </View>
         ))}
-      </ScrollView>
+      </ScrollView> */}
+      <GoalInput onAddGoal={addGoalHandler} />
+      <FlatList
+        data={courcegoal}
+        keyExtractor={(item, index) => item.id}
+        renderItem={(itemData) => (
+          <GoalItem
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
+          />
+        )}
+      />
     </View>
   );
 }
@@ -51,23 +63,5 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: {
     padding: 50,
-  },
-  inputcontainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  textinput: {
-    borderBottomColor: "black",
-    borderWidth: 1,
-    padding: 5,
-    width: "80%",
-  },
-  listitem: {
-    padding: 10,
-    backgroundColor: "#ccc",
-    marginVertical: 10,
-    borderColor: "black",
-    borderWidth: 1,
   },
 });
