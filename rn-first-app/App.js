@@ -14,6 +14,7 @@ import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [courcegoal, setCourcegoal] = useState([]);
+  const [addmode, setAddmode] = useState(false);
 
   const addGoalHandler = (goalTitle, setEntergoal) => {
     // setCourcegoal((currentGoals) => [...currentGoals, entergoal]);
@@ -27,6 +28,7 @@ export default function App() {
       ]);
     }
     setEntergoal("");
+    setAddmode(false);
   };
 
   const removeGoalHandler = (goalId) => {
@@ -35,16 +37,18 @@ export default function App() {
     });
   };
 
+  const cancelgoal = () => {
+    setAddmode(false);
+  };
+
   return (
     <View style={styles.screen}>
-      {/* <ScrollView showsVerticalScrollIndicator={false}>
-        {courcegoal.map((goal, index) => (
-          <View key={index} style={styles.listitem}>
-            <Text>{goal}</Text>
-          </View>
-        ))}
-      </ScrollView> */}
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title="Add New Goals" onPress={() => setAddmode(true)} />
+      <GoalInput
+        addmode={addmode}
+        onAddGoal={addGoalHandler}
+        onCancel={cancelgoal}
+      />
       <FlatList
         data={courcegoal}
         keyExtractor={(item, index) => item.id}
