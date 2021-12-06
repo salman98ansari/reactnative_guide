@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 const StartGame = () => {
   return (
     <View style={styles.screen}>
-      <Text>The Game Screen</Text>
+      <Text>Theee Game Screen</Text>
       <View style={styles.inputcontainer}>
         <Text>Select a Number</Text>
         <TextInput />
