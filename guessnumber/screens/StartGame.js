@@ -13,8 +13,9 @@ import colors from "../constants/colors.js";
 
 import Card from "../components/Card";
 import Input from "../components/Input";
+import NumberContainer from "../components/NumberContainer.js";
 
-const StartGame = () => {
+const StartGame = ({ onstartGame }) => {
   const [enteredValue, setEnteredValue] = useState("");
   const [confirmed, setConfirmed] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState();
@@ -39,11 +40,24 @@ const StartGame = () => {
     setConfirmed(true);
     setSelectedNumber(parseInt(enteredValue));
     setEnteredValue("");
+    Keyboard.dismiss();
   };
 
+  // we can use JSX this way
   let confirmedOutput;
   if (confirmed) {
-    confirmedOutput = <Text>Chosen Number is :{selectedNumber}</Text>;
+    confirmedOutput = (
+      <Card style={styles.summaryContainer}>
+        <Text>You Selected</Text>
+        <NumberContainer>{selectedNumber}</NumberContainer>
+        <Button
+          title="Start Game"
+          onPress={() => {
+            onstartGame(selectedNumber);
+          }}
+        />
+      </Card>
+    );
   }
 
   return (
@@ -112,5 +126,9 @@ const styles = StyleSheet.create({
   textinput: {
     width: 60,
     textAlign: "center",
+  },
+  summaryContainer: {
+    marginTop: 20,
+    alignItems: "center",
   },
 });
