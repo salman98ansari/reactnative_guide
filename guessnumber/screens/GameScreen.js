@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button, StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import Card from "../components/Card";
+import MainButton from "../components/MainButton";
 import NumberContainer from "../components/NumberContainer";
 
 const generateRandom = (min, max, exclude) => {
@@ -58,11 +60,17 @@ const GameScreen = (props) => {
       <Text>Opponent Guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttoncontainer}>
-        <Button title="Lower" onPress={nextGuessHandler.bind(this, "lower")} />
-        <Button
+        <MainButton onPress={nextGuessHandler.bind(this, "lower")}>
+          <Ionicons name="md-remove" size={24} color={"white"} />
+        </MainButton>
+        <MainButton onPress={nextGuessHandler.bind(this, "greater")}>
+          <Ionicons name="md-add" size={24} color={"white"} />
+        </MainButton>
+        {/* <Button title="Lower" onPress={nextGuessHandler.bind(this, "lower")} /> */}
+        {/* <Button
           title="Greater"
           onPress={nextGuessHandler.bind(this, "greater")}
-        />
+        /> */}
       </Card>
     </View>
   );
