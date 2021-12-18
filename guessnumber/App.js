@@ -8,29 +8,29 @@ import StartGame from "./screens/StartGame";
 import GameScreen from "./screens/GameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
 
-const fetchFonts = () => {
-  Font.loadAsync({
-    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
-  });
-};
+// const fetchFonts = () => {
+//   Font.loadAsync({
+//     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+//     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+//   });
+// };
 
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [guessRound, setGuessRound] = useState(0);
   const [dataloaded, setDataLoaded] = useState(false);
 
-  if (!dataloaded) {
-    return (
-      <AppLoading
-        startAsync={fetchFonts}
-        onFinish={() => {
-          setDataLoaded(true);
-        }}
-        onError={(err) => console.log(err)}
-      />
-    );
-  }
+  // if (!dataloaded) {
+  //   return (
+  //     <AppLoading
+  //       startAsync={fetchFonts}
+  //       onFinish={() => {
+  //         setDataLoaded(true);
+  //       }}
+  //       onError={(err) => console.log(err)}
+  //     />
+  //   );
+  // }
 
   const configureNewgame = () => {
     setGuessRound(0);
@@ -47,6 +47,13 @@ export default function App() {
   };
 
   let content = <StartGame onstartGame={startGameHandler} />;
+  content = (
+    <GameOverScreen
+      userNumber={1}
+      roundsNumber={1}
+      onRestart={configureNewgame}
+    />
+  );
 
   if (userNumber && guessRound <= 0) {
     content = (
