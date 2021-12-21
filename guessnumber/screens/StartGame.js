@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions,
 } from "react-native";
 import colors from "../constants/colors.js";
 
@@ -122,8 +123,9 @@ const styles = StyleSheet.create({
     // fontFamily: "open-sans-bold"
   },
   inputcontainer: {
-    width: 300,
-    maxWidth: "80%",
+    width: "80%",
+    maxWidth: "95%",
+    minWidth: 300,
     alignItems: "center",
   },
   buttoncontainer: {

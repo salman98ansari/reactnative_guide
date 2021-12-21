@@ -6,6 +6,7 @@ import {
   Alert,
   ScrollView,
   FlatList,
+  Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Card from "../components/Card";
@@ -117,7 +118,7 @@ const styles = StyleSheet.create({
   buttoncontainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 20,
+    marginTop: Dimensions.get("window").height > 600 ? 30 : 5,
     width: 300,
     maxWidth: "80%",
   },
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   listcontainer: {
-    width: "60%",
+    width: Dimensions.get("window").width > 350 ? "60%" : "80%",
     flex: 1,
   },
   list: {
