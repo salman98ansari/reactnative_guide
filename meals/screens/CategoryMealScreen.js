@@ -20,6 +20,14 @@ const CategoryMealScreen = (props) => {
   );
 };
 
+// CategoryMealScreen.navigationOptions = (navigationData) => {
+//   const catId = props.navigation.getParam("categoryId");
+
+//   const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
+//   return {
+//     headerTitle: selectedCategory.title,
+//   };
+// };
 export default CategoryMealScreen;
 
 const styles = StyleSheet.create({
