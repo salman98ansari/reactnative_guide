@@ -1,10 +1,21 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { CATEGORIES } from "../data/dummy-data";
 
-const CategoryMealScreen = () => {
+const CategoryMealScreen = (props) => {
+  const catId = props.navigation.getParam("categoryId");
+
+  const selectedCategory = CATEGORIES.find((cat) => cat.id === catId);
   return (
     <View style={styles.screen}>
       <Text>Category meal Screeen</Text>
+      <Text>{selectedCategory.title}</Text>
+      <Button
+        title="next"
+        onPress={() => {
+          props.navigation.navigate("MealDetail");
+        }}
+      />
     </View>
   );
 };
