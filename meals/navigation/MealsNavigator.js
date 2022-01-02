@@ -20,6 +20,7 @@ const MealsNavigator = createStackNavigator(
     },
     MealDetail: {
       screen: MealDetailScreen,
+
       navigationOptions: {
         // headerRight: (
         //   <HeaderButtons headerButtonComponent={HeaderButto}>
